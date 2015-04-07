@@ -1,0 +1,51 @@
+<div id="container">
+</div>
+<script>
+  $(function () {
+    $('#container').highcharts({
+      chart: {
+        type: 'line'
+      },
+      title: {
+        text: '报价统计表'
+      },
+      subtitle: {
+        text: ''
+      },
+      xAxis: {
+        categories: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月']
+      },
+      yAxis: {
+        title: {
+          text: '价格'
+        }
+      },
+      tooltip: {
+        enabled: true,
+        formatter: function() {
+          return '<b>'+ this.series.name +'</b><br>'+this.x +': '+ this.y +'°C';
+        }
+      },
+      plotOptions: {
+        line: {
+          dataLabels: {
+            enabled: true
+          },
+          enableMouseTracking: false
+        }
+      },
+      series: [
+        {
+          name: '2012年',
+          data: <%= @o1.map(&:price) %>
+        },
+        {
+          name: '2013年',
+          data: <%= @o2.map(&:price) %>
+        }
+      ]
+
+    });
+  });
+
+</script>
