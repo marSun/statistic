@@ -55,5 +55,11 @@ Rails.application.routes.draw do
   #     resources :products
   #   end
   resources :statistics
+  resources :offers
+  resources :clients do 
+    member do 
+      get :get_clients
+    end
+  end
   root to: "home#index"
 end

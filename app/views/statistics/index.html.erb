@@ -1,40 +1,88 @@
-<div id="container">
+<!-- block -->
+<div class="block">
+    <div class="navbar navbar-inner block-header">
+        <div class="muted pull-left">筛选条件</div>
+    </div>
+    <div class="block-content collapse in"> <div class="span12">
+            <form class="form-horizontal">
+                <div class="row-fluid">
+                    <!-- block -->
+                    <div class="content collapse in">
+                      <div class="span12">
+                        <table class="table">
+                          <thead>
+                            <tr>
+                              <th>业务员</th>
+                              <th>客户</th>
+                              <th>物品</th>
+                              <th>港口</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td>
+                                <select id="select01" class="chzn-select">
+                                  <% @agents.each do |agent| %>
+                                    <option value=<%=agent.id %>><%= agent.name %></option>
+                                  <% end %>
+                                </select>
+                              </td>
+                              <td>
+                                <select id="select02" class="chzn-select">
+                                </select>
+                              </td>
+                              <td>
+                                <select id="select03" class="chzn-select">
+                                  <% @goodses.each do |goods| %>
+                                    <option value=<%=goods.id %>><%= goods.name %></option>
+                                  <% end %>
+                                </select>
+                              </td>
+                              <td>
+                                <select id="select04" class="chzn-select">
+                                  <% @ports.each do |port| %>
+                                    <option value=<%=port.id %>><%= port.name %></option>
+                                  <% end %>
+                                </select>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                        <button id="submit_button" type="button" class="btn btn-primary">查询</button>
+                      </div>
+                    </div>
+                    <!-- /block -->
+                </div>
+            </form>
+
+        </div>
+    </div>
 </div>
+<!-- /block -->
+
+            <%= form_tag "/statistics", method: :get, id: "submit_form" do %>
+              <%= hidden_field_tag "agent_id" %>
+              <%= hidden_field_tag "client_id" %>
+              <%= hidden_field_tag "goods_id" %>
+              <%= hidden_field_tag "port_id" %>
+
+            <% end %>
+<div class="block">
+    <div class="span12">
+      <span class="label label-success"><%= @agent.try(:name) %></span>
+      <span class="label label-warning"><%= @client.try(:name) %></span>
+      <span class="label label-important"><%= @goods.try(:name) %></span>
+      <span class="label label-info"><%= @port.try(:name) %></span>
+    </div>
+</div>
+
+<div id="line-container">
+</div>
+
 <script>
-  $(function () {
-    $('#container').highcharts({
-      chart: {
-        type: 'line'
-      },
-      title: {
-        text: '报价统计表'
-      },
-      subtitle: {
-        text: ''
-      },
-      xAxis: {
-        categories: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月']
-      },
-      yAxis: {
-        title: {
-          text: '价格'
-        }
-      },
-      tooltip: {
-        enabled: true,
-        formatter: function() {
-          return '<b>'+ this.series.name +'</b><br>'+this.x +': '+ this.y +'°C';
-        }
-      },
-      plotOptions: {
-        line: {
-          dataLabels: {
-            enabled: true
-          },
-          enableMouseTracking: false
-        }
-      },
-      series: [
+$(function(){
+    render_line(
+      [
         {
           name: '2012年',
           data: <%= @o1.map(&:price) %>
@@ -43,9 +91,7 @@
           name: '2013年',
           data: <%= @o2.map(&:price) %>
         }
-      ]
-
-    });
-  });
-
+      ]   
+    );
+  })
 </script>
