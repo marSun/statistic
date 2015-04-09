@@ -1,3 +1,4 @@
+<%= javascript_include_tag 'statistics' %>
 <!-- block -->
 <div class="block">
     <div class="navbar navbar-inner block-header">
@@ -60,13 +61,12 @@
 </div>
 <!-- /block -->
 
-            <%= form_tag "/statistics", method: :get, id: "submit_form" do %>
-              <%= hidden_field_tag "agent_id" %>
-              <%= hidden_field_tag "client_id" %>
-              <%= hidden_field_tag "goods_id" %>
-              <%= hidden_field_tag "port_id" %>
-
-            <% end %>
+<%= form_tag "/statistics", method: :get, id: "submit_form" do %>
+  <%= hidden_field_tag "agent_id" %>
+  <%= hidden_field_tag "client_id" %>
+  <%= hidden_field_tag "goods_id" %>
+  <%= hidden_field_tag "port_id" %>
+<% end %>
 <div class="block">
     <div class="span12">
       <span class="label label-success"><%= @agent.try(:name) %></span>

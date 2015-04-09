@@ -1,5 +1,6 @@
   $(function(){
-    $("#offer_statistic").addClass("active")
+    $("ul.nav.nav-list li").removeClass("active");
+    $("#offer_statistic").addClass("active");
   })
   $(function(){
    get_clients(); 
@@ -18,7 +19,6 @@
     $("#goods_id").attr("value", $("#select03").val());
     $("#port_id").attr("value", $("#select04").val());
     form.submit();
-  
   }
   
   function get_clients(){

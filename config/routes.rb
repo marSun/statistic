@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
-  devise_for :users
-  # The priority is based upon order of creation: first created -> highest priority.
-  # See how all your routes lay out with "rake routes".
+  devise_for :users, controllers: {
+    sessions: 'users/sessions'
+
+  }
+# The priority is based upon order of creation: first created -> highest priority.
+# See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
@@ -55,7 +58,11 @@ Rails.application.routes.draw do
   #     resources :products
   #   end
   resources :statistics
-  resources :offers
+  resources :offers do
+    collection do
+      get :list
+    end
+  end
   resources :clients do 
     member do 
       get :get_clients
