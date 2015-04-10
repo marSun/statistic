@@ -16,6 +16,9 @@
 class Offer < ActiveRecord::Base
 
   belongs_to :agent
+  belongs_to :client
+  belongs_to :goods, class_name: "Goods"
+  belongs_to :port
 
 
 end

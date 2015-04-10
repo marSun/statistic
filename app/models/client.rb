@@ -9,5 +9,6 @@
 
 class Client < ActiveRecord::Base
   belongs_to :agent
+  has_many :offers
 
 end

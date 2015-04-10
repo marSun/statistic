@@ -1,0 +1,89 @@
+<%= javascript_include_tag "offers" %>
+<script type="text/javascript" src="/vendors/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="/assets/form-validation.js"></script> 
+           <!-- validation -->
+<div class="row-fluid">
+  <!-- block -->
+  <div class="block">
+    <div class="navbar navbar-inner block-header">
+      <div class="muted pull-left">报价录入</div>
+    </div>
+    <div class="block-content collapse in">
+      <div class="span12">
+        <!-- BEGIN FORM-->
+        <form action="#" id="offer_form" class="form-horizontal">
+          <fieldset>
+            <div class="alert alert-error hide">
+              <button class="close" data-dismiss="alert"></button>
+              You have some form errors. Please check below.
+            </div>
+            <div class="alert alert-success hide">
+              <button class="close" data-dismiss="alert"></button>
+              Your form validation is successful!
+            </div>
+              <div class="control-group">
+                <label class="control-label">录入人员<span class="required">*</span></label>
+                <div class="controls">
+                  <select class="span6 m-wrap" name="category" id="select1">
+                    <option value=<%= @agent.id %>><%= @agent.name %></option>
+                  </select>
+                </div>
+              </div>
+              <div class="control-group">
+                <label class="control-label">客户<span class="required">*</span></label>
+                <div class="controls">
+                  <select class="span6 m-wrap" name="category" id="select2">
+                      <option value=<%= @offer.client.id %>><%= @offer.client.name %></option>
+                    <%= (@agent.clients - [@offer.client]).each do |client| %>
+                      <option value=<%= client.id %>><%= client.name %></option>
+                    <% end %>
+                  </select>
+                </div>
+              </div>
+              <div class="control-group">
+                <label class="control-label">物品<span class="required">*</span></label>
+                <div class="controls">
+                  <select class="span6 m-wrap" name="category" id="select3">
+                      <option value=<%= @offer.goods.id %>><%= @offer.goods.name %></option>
+                    <%= (@goodses - [@offer.goods]).each do |goods| %>
+                      <option value=<%= goods.id %>><%= goods.name %></option>
+                    <% end %>
+                  </select>
+                </div>
+              </div>
+              <div class="control-group">
+                <label class="control-label">港口<span class="required">*</span></label>
+                <div class="controls">
+                  <select class="span6 m-wrap" name="category" id="select4">
+                      <option value=<%= @offer.port.id %>><%= @offer.port.name %></option>
+                    <%= (@ports - [@offer.port]).each do |port| %>
+                      <option value=<%= port.id %>><%= port.name %></option>
+                    <% end %>
+                  </select>
+                </div>
+              </div>
+              <div class="control-group">
+                <label class="control-label">报价<span class="required">*</span></label>
+                <div class="controls">
+                  <input name="number" type="text" class="span6 m-wrap" id="price" value="<%= @offer.price %>"/>
+                </div>
+              </div>
+              <div class="form-actions" style="background-color: white; border-top: 0">
+                <button id="update-offer-button" type="button" class="btn btn-primary">修改</button>
+              </div>
+          </fieldset>
+        </form>
+        <!-- END FORM-->
+        <%= form_tag "/offers/#{@offer.id}", method: :put, id: "offer_create_form" do %>
+          <%= hidden_field_tag "agent_id" %>
+          <%= hidden_field_tag "client_id" %>
+          <%= hidden_field_tag "goods_id" %>
+          <%= hidden_field_tag "port_id" %>
+          <%= hidden_field_tag "offer_price" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <!-- /block -->
+</div>
+<!-- /validation -->
