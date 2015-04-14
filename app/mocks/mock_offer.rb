@@ -16,7 +16,7 @@ class MockOffer
                         client_id: client.id,
                         goods_id: Goods.all.sample.id,
                         price: rand(100),
-                        port: ports.sample,
+                        port_id: Port.last.id,
                         date: date
                       })
           date = date.next_month

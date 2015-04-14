@@ -25,3 +25,5 @@ test:
 production:
   <<: *default
   database: statistic_pro
+  username: statistic
+  password: statistic_pro
