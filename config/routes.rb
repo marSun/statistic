@@ -67,6 +67,9 @@ Rails.application.routes.draw do
     member do 
       get :get_clients
     end
+    collection do
+      get :list
+    end
   end
   root to: "home#index"
 end

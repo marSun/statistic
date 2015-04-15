@@ -1,13 +1,19 @@
 <div class="span3" id="sidebar">
   <ul class="nav nav-list bs-docs-sidenav nav-collapse collapse">
-      <li id="offer_statistic">
-      <a href="/statistics"><i class="icon-chevron-right"></i>报价统计</a>
+      <li>
+        <a href="#" data-toggle="collapse" data-target="#offer-submenu"><i class="icon-chevron-right"></i>报价管理</a>
       </li>
-      <li id="offer_new">
-      <a href="/offers/new"><i class="icon-chevron-right"></i>报价录入</a>
+      <li id="offer-submenu"  class="collapse" style="background-color: rgb(220, 221, 218);">
+        <a id="offer_statistic" href="/statistics"><i class="icon-chevron-right"></i>报价统计</a>
+        <a id="offer_new" href="/offers/new"><i class="icon-chevron-right"></i>报价录入</a>
+        <a id="offer_list" href="/offers/list"><i class="icon-chevron-right"></i>报价列表</a>
       </li>
-      <li id="offer_list">
-      <a href="/offers/list"><i class="icon-chevron-right"></i>报价列表</a>
+      <li>
+        <a href="#" data-toggle="collapse" data-target="#client-submenu"><i class="icon-chevron-right"></i>客户管理</a>
+      </li>
+      <li id="client-submenu" class="collapse submenu">
+        <a id="client_new" href="/clients/new"><i class="icon-chevron-right"></i>添加客户</a>
+        <a id="client_list" href="/clients/list"><i class="icon-chevron-right"></i>客户列表</a>
       </li>
   </ul>
 </div>

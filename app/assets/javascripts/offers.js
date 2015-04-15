@@ -1,5 +1,6 @@
 $(function(){
   $("ul.nav.nav-list li").removeClass("active");
+  $("#offer-submenu").addClass("in");
   $("#offer_new").addClass("active");
 });
 $(function(){
