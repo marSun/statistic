@@ -9,7 +9,8 @@ $(function(){
   });
 });
 $(function(){
-  FormValidation.init();
+  form = $("#offer_form");
+  FormValidation.init(form);
 });
 
 function create_offer(){

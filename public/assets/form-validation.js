@@ -1,10 +1,10 @@
 var FormValidation = function () {
 
-    var handleValidation1 = function() {
+    var handleValidation1 = function(form) {
         // for more info visit the official plugin documentation: 
             // http://docs.jquery.com/Plugins/Validation
 
-            var form1 = $('#form_sample_1');
+            var form1 = form;
             var error1 = $('.alert-error', form1);
             var success1 = $('.alert-success', form1);
 
@@ -73,15 +73,16 @@ var FormValidation = function () {
                 submitHandler: function (form) {
                     success1.show();
                     error1.hide();
+                    form.submit();
                 }
             });
     }
 
     return {
         //main function to initiate the module
-        init: function () {
+        init: function (form) {
 
-            handleValidation1();
+            handleValidation1(form);
 
         },
 
