@@ -2,7 +2,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
 # before_filter :configure_sign_up_params, only: [:create]
 # before_filter :configure_account_update_params, only: [:update]
 
-  layout "home", only: [:new]
+  layout "home", only: [:new, :create]
+  skip_filter :require_no_authentication, only: [:new, :create]
   # GET /resource/sign_up
   def new
     super
@@ -10,10 +11,37 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # POST /resource
   def create
-    params.require(:user).permit(:name)
+    params.permit(user: [:name])
     agent = Agent.create!({name: params[:user][:name]})
 
-    super
+    build_resource(sign_up_params)
+
+    resource_saved = resource.save
+
+    resource.name = params[:user][:name]
+    resource.agent_id = agent.id
+    if resource_saved
+      if resource.active_for_authentication?
+        set_flash_message :notice, :signed_up if is_flashing_format?
+        #sign_up(resource_name, resource)
+        flash[:add_success] = "<script> $('#myModal').modal();</script>"
+        redirect_to "/users/sign_up/" 
+        #respond_with resource, location: after_sign_up_path_for(resource)
+      else
+        set_flash_message :notice, :"signed_up_but_#{resource.inactive_message}" if is_flashing_format?
+        expire_data_after_sign_in!
+        respond_with resource, location: after_inactive_sign_up_path_for(resource)
+      end
+
+    else
+      clean_up_passwords resource
+      @validatable = devise_mapping.validatable?
+      if @validatable
+        @minimum_password_length = resource_class.password_length.min
+      end
+      respond_with resource
+    end
+
   end
 
   # GET /resource/edit
