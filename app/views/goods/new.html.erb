@@ -1,0 +1,49 @@
+<%= javascript_include_tag "goods" %>
+<div class="row-fluid">
+  <!-- block -->
+  <div class="block">
+    <div class="navbar navbar-inner block-header">
+      <div class="muted pull-left">添加物品</div>
+    </div>
+    <div class="block-content collapse in">
+      <div class="span12">
+        <!-- BEGIN FORM-->
+        <form action="#" id="goods_form" class="form-horizontal">
+          <fieldset>
+            <div class="alert alert-error hide">
+              <button class="close" data-dismiss="alert"></button>
+              You have some form errors. Please check below.
+            </div>
+            <div class="alert alert-success hide">
+              <button class="close" data-dismiss="alert"></button>
+              Your form validation is successful!
+            </div>
+         
+              <div class="control-group">
+                <label class="control-label">物品名<span class="required">*</span></label>
+                <div class="controls">
+                  <input name="goods_name" type="text" class="span6 m-wrap" id="goods-name"/>
+                </div>
+              </div>
+              <div class="form-actions" style="background-color: white; border-top: 0">
+                <button id="create-goods-button" type="button" class="btn btn-primary">创建</button>
+              </div>
+          </fieldset>
+        </form>
+        <!-- END FORM-->
+        <%= form_tag "/goods", method: :post, id: "goods_create_form" do %>
+          <%= hidden_field_tag "goods_name" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <!-- /block -->
+</div>
+<!-- /validation -->
+<script>
+  $(function(){
+    $("ul.nav.nav-list li").removeClass("active");
+    $("#goods-submenu").addClass("in");
+    $("#goods_new").addClass("active");
+  });
+</script>
