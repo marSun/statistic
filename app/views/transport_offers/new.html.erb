@@ -1,0 +1,118 @@
+<%= javascript_include_tag "transport_offers" %>
+<script type="text/javascript" src="/vendors/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="/assets/form-validation.js"></script> 
+
+<link href="/vendors/datepicker.css" rel="stylesheet" media="screen">
+<script src="/vendors/bootstrap-datepicker.js"></script>
+           <!-- validation -->
+<div class="row-fluid">
+  <!-- block -->
+  <div class="block">
+    <div class="navbar navbar-inner block-header">
+      <div class="muted pull-left">货运报价</div>
+    </div>
+    <div class="block-content collapse in">
+      <div class="span12">
+        <!-- BEGIN FORM-->
+        <form action="#" id="trans_offer_form" class="form-horizontal">
+          <fieldset>
+            <div class="alert alert-error hide">
+              <button class="close" data-dismiss="alert"></button>
+              You have some form errors. Please check below.
+            </div>
+            <div class="alert alert-success hide">
+              <button class="close" data-dismiss="alert"></button>
+              Your form validation is successful!
+            </div>
+              <div class="control-group">
+                <label class="control-label">货运公司<span class="required">*</span></label>
+                <div class="controls">
+                  <select class="span6 m-wrap" name="category" id="select1">
+                    <%= @trans_companies.each do |c| %>
+                      <option value=<%= c.id %>><%= c.name %></option>
+                    <% end %>
+                  </select>
+                </div>
+              </div>             
+              <div class="control-group">
+                <label class="control-label">物品<span class="required">*</span></label>
+                <div class="controls">
+                  <select class="span6 m-wrap" name="category" id="select2">
+                    <%= @goodses.each do |goods| %>
+                      <option value=<%= goods.id %>><%= goods.name %></option>
+                    <% end %>
+                  </select>
+                </div>
+              </div>
+              <div class="control-group">
+                <label class="control-label">尺柜<span class="required">*</span></label>
+                <div class="controls">
+                  <select class="span6 m-wrap" name="category" id="select3">
+                      <option value="small">小柜</option>
+                      <option value="big">大柜</option>
+                  </select>
+                </div>
+              </div>
+              <div class="control-group">
+                <label class="control-label">港口<span class="required">*</span></label>
+                <div class="controls">
+                  <select class="span6 m-wrap" name="category" id="select4">
+                    <%= @ports.each do |port| %>
+                      <option value=<%= port.id %>><%= port.name %></option>
+                    <% end %>
+                  </select>
+                </div>
+              </div>
+              <div class="control-group">
+                <label class="control-label" for="date01">发货日期<span class="required">*</span></label>
+                <div class="controls">
+                  <input type="text" class="input-xlarge datepicker" id="date01" value="">
+                </div>
+              </div>
+              <div class="control-group">
+                <label class="control-label">报价<span class="required">*</span></label>
+                <div class="controls">
+                  <input name="number" type="text" class="span6 m-wrap" id="trans_offer_price"/>
+                </div>
+              </div>
+              <div class="form-actions" style="background-color: white; border-top: 0">
+                <button id="create-trans-offer-button" type="button" class="btn btn-primary">创建</button>
+              </div>
+          </fieldset>
+        </form>
+        <!-- END FORM-->
+        <%= form_tag "/transport_offers", method: :post, id: "trans_offer_create_form" do %>
+          <%= hidden_field_tag "company_id" %>
+          <%= hidden_field_tag "goods_id" %>
+          <%= hidden_field_tag "cabinet" %>
+          <%= hidden_field_tag "deliver_goods_at" %>
+          <%= hidden_field_tag "port_id" %>
+          <%= hidden_field_tag "price" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <!-- /block -->
+</div>
+<!-- /validation -->
+<script>
+  $(function(){
+    $(".datepicker").datepicker({
+      autoclose: true,
+      todayHighlight: true,
+      todayBtn: "linked",
+      format: 'yyyy-mm-dd',
+      startDate: '-3d',
+      initialDate: new Date()
+    }); 
+    today = new Date();
+    year = today.getFullYear();
+    month = today.getMonth() + 1;
+    month = ((month<10)? ("0" + month):month);
+    date = today.getDate();
+    date = ((date<10)? ("0" + date):date);
+    default_value = year+ "-" + month + "-" + date;
+    $("#date01").val(default_value);
+  })
+ 
+</script>

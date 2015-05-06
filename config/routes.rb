@@ -59,6 +59,7 @@ Rails.application.routes.draw do
   #     resources :products
   #   end
   resources :statistics
+  resources :transport_offers
   resources :ports do 
     collection do 
       get :list

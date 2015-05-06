@@ -7,10 +7,10 @@
 #  client_id  :integer
 #  goods_id   :integer
 #  price      :float(24)
-#  port       :string(255)
 #  date       :datetime
 #  created_at :datetime
 #  updated_at :datetime
+#  port_id    :integer
 #
 
 class Offer < ActiveRecord::Base

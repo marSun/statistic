@@ -34,7 +34,7 @@ gem 'pry', '0.9.12.2'
 gem 'pry-byebug'
 gem 'annotate'
 
-
+gem 'cancancan', '~> 1.10'
 
 
 # Use ActiveModel has_secure_password
