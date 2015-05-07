@@ -22,6 +22,23 @@ class TransportOffersController < ApplicationController
 
   end
 
+  def statistic
+    @companies = TransportCompany.all
+    @goodses = Goods.all
+    @ports = Port.all
+    @cabinets = Cabinet.all
+    
+    company_id = params[:company_id]
+#    client_id = params[:client_id]
+    #goods_id = params[:goods_id]
+    #port_id = params[:port_id]
+
+    #@agent = Agent.find(agent_id) rescue nil
+    #@client = Client.find(client_id) rescue nil
+    #@goods = Goods.find(goods_id) rescue nil
+   # @port = Port.find(port_id) rescue nil
+  end
+
 
 
 end

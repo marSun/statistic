@@ -1,0 +1,119 @@
+<link href="/vendors/datepicker.css" rel="stylesheet" media="screen">
+<script src="/vendors/bootstrap-datepicker.js"></script>
+<!-- block -->
+<div class="block">
+    <div class="navbar navbar-inner block-header">
+        <div class="muted pull-left">筛选条件</div>
+    </div>
+    <div class="block-content collapse in"> <div class="span12">
+            <form class="form-horizontal">
+                <div class="row-fluid">
+                    <!-- block -->
+                    <div class="content collapse in">
+                      <div class="span12">
+                        <table class="table">
+                          <thead>
+                            <tr>
+                              <th>发货时间</th>
+                              <th>尺柜</th>
+                              <th>物品</th>
+                              <th>港口</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td>
+                                <input type="text" class="input-xsmall datepicker" id="date01" value="">
+                              </td>
+                              <td>
+                                <select id="select02" class="chzn-select">
+                                  <% @cabinets.each do |c| %>
+                                    <option value=<%=c.id %>><%= c.name %></option>
+                                  <% end %>
+                                </select>
+                              </td>
+                              <td>
+                                <select id="select03" class="chzn-select">
+                                  <% @goodses.each do |goods| %>
+                                    <option value=<%=goods.id %>><%= goods.name %></option>
+                                  <% end %>
+                                </select>
+                              </td>
+                              <td>
+                                <select id="select04" class="chzn-select">
+                                  <% @ports.each do |port| %>
+                                    <option value=<%=port.id %>><%= port.name %></option>
+                                  <% end %>
+                                </select>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                        
+                        <button id="submit_button" type="button" class="btn btn-primary">查询</button>
+                      </div>
+                    </div>
+                    <!-- /block -->
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+<!-- /block -->
+
+<%= form_tag "/transport_offers/statistic", method: :get, id: "submit_form" do %>
+  <%= hidden_field_tag "company_id" %>
+  <%= hidden_field_tag "client_id" %>
+  <%= hidden_field_tag "goods_id" %>
+  <%= hidden_field_tag "port_id" %>
+<% end %>
+<div class="block">
+    <div class="span12">
+      <span class="label label-success"><%= @agent.try(:name) %></span>
+      <span class="label label-warning"><%= @client.try(:name) %></span>
+      <span class="label label-important"><%= @goods.try(:name) %></span>
+      <span class="label label-info"><%= @port.try(:name) %></span>
+    </div>
+</div>
+
+<div id="line-container">
+</div>
+
+<script>
+$(function(){
+    render_line(
+      [
+        {
+          name: '2012年',
+          data: <%#= @o1.map(&:price) %>
+        },
+        {
+          name: '2013年',
+          data: <%#= @o2.map(&:price) %>
+        }
+      ]   
+    );
+  })
+</script>
+<script>
+  $(function(){
+    $(".datepicker").datepicker({
+      autoclose: true,
+      todayHighlight: true,
+      todayBtn: "linked",
+      format: 'yyyy-mm-dd',
+      startDate: '-3d',
+      initialDate: new Date()
+    }); 
+    today = new Date();
+    year = today.getFullYear();
+    month = today.getMonth() + 1;
+    month = ((month<10)? ("0" + month):month);
+    date = today.getDate();
+    date = ((date<10)? ("0" + date):date);
+    default_value = year+ "-" + month + "-" + date;
+    $("#date01").val(default_value);
+  })
+ 
+</script>

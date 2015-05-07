@@ -23,4 +23,5 @@ class StatisticsController < ApplicationController
     @o2 = Offer.where(agent_id: agent_id, client_id: client_id, goods_id: goods_id, port_id: port_id).where("date >= :start AND date <= :end", {start: Date.new(2013,1,1), end: Date.new(2014,1,1)})
   end
 
+
 end
