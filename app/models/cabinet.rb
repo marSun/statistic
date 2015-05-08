@@ -15,4 +15,8 @@ class Cabinet
     return ALL
   end
 
+  def self.find_by_id(id)
+    all.select{|e| e.id == id}.try(:first)
+  end
+
 end

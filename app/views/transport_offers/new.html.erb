@@ -113,6 +113,12 @@
     date = ((date<10)? ("0" + date):date);
     default_value = year+ "-" + month + "-" + date;
     $("#date01").val(default_value);
-  })
+  });
+
+  $(function(){
+    $("ul.nav.nav-list li").removeClass("active");
+    $("#trans-submenu").addClass("in");
+    $("#trans_new").addClass("active");
+  });
  
 </script>

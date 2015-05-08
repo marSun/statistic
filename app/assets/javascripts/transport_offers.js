@@ -1,9 +1,4 @@
 $(function(){
-  $("ul.nav.nav-list li").removeClass("active");
-  $("#offer-submenu").addClass("in");
-  $("#offer_new").addClass("active");
-});
-$(function(){
   $("#create-trans-offer-button").click(function(){
     create_trans_offer();
   });

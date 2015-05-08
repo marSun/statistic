@@ -14,7 +14,7 @@
 #
 
 class TransportOffer < ActiveRecord::Base
-
-
-
+  belongs_to :company, class_name: "TransportCompany"
+  belongs_to :goods, class_name: "Goods"
+  belongs_to :port
 end

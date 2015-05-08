@@ -1,3 +1,4 @@
+<%= javascript_include_tag 'transport_offer_search' %>
 <link href="/vendors/datepicker.css" rel="stylesheet" media="screen">
 <script src="/vendors/bootstrap-datepicker.js"></script>
 <!-- block -->
@@ -27,8 +28,8 @@
                               </td>
                               <td>
                                 <select id="select02" class="chzn-select">
-                                  <% @cabinets.each do |c| %>
-                                    <option value=<%=c.id %>><%= c.name %></option>
+                                  <% @cabinets.each do |cab| %>
+                                    <option value=<%=cab.id %>><%= cab.name %></option>
                                   <% end %>
                                 </select>
                               </td>
@@ -63,38 +64,28 @@
 <!-- /block -->
 
 <%= form_tag "/transport_offers/statistic", method: :get, id: "submit_form" do %>
-  <%= hidden_field_tag "company_id" %>
-  <%= hidden_field_tag "client_id" %>
+  <%= hidden_field_tag "deliver_at" %>
+  <%= hidden_field_tag "cabinet" %>
   <%= hidden_field_tag "goods_id" %>
   <%= hidden_field_tag "port_id" %>
 <% end %>
 <div class="block">
     <div class="span12">
-      <span class="label label-success"><%= @agent.try(:name) %></span>
-      <span class="label label-warning"><%= @client.try(:name) %></span>
+      <span class="label label-success"><%= @deliver_at %></span>
+      <span class="label label-warning"><%= @cabinet.try(:name) %></span>
       <span class="label label-important"><%= @goods.try(:name) %></span>
       <span class="label label-info"><%= @port.try(:name) %></span>
     </div>
 </div>
 
-<div id="line-container">
+<div id="column-container">
 </div>
 
 <script>
 $(function(){
-    render_line(
-      [
-        {
-          name: '2012年',
-          data: <%#= @o1.map(&:price) %>
-        },
-        {
-          name: '2013年',
-          data: <%#= @o2.map(&:price) %>
-        }
-      ]   
-    );
-  })
+  chart_data = <%=raw @array.to_json %>
+  render_column(chart_data);
+})
 </script>
 <script>
   $(function(){
@@ -116,4 +107,9 @@ $(function(){
     $("#date01").val(default_value);
   })
  
+  $(function(){
+    $("ul.nav.nav-list li").removeClass("active");
+    $("#trans-submenu").addClass("in");
+    $("#trans_statistic").addClass("active");
+  });
 </script>
