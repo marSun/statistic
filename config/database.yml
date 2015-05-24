@@ -10,9 +10,16 @@ default: &default
   timeout: 5000
   username: tianji
   password: tianji
+my_dev: &my_dev
+  adapter: mysql2
+  pool: 5
+  timeout: 5000
+  username: statistic
+  password: statistic_my_dev
+
 
 development:
-  <<: *default
+  <<: *my_dev
   database: statistic_dev
 
 # Warning: The database defined as "test" will be erased and

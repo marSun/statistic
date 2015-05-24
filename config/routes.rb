@@ -89,5 +89,13 @@ Rails.application.routes.draw do
       get :list
     end
   end
+  resources :orders do
+    collection do
+      get :cfr_statistic
+      get :trans_percent_statistic
+      get :fob_percent_statistic
+    end
+
+  end
   root to: "home#index"
 end

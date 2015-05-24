@@ -1,0 +1,73 @@
+<%= javascript_include_tag 'orders' %>
+<!-- block -->
+<div class="block">
+    <div class="navbar navbar-inner block-header">
+        <div class="muted pull-left">筛选条件</div>
+    </div>
+    <div class="block-content collapse in"> <div class="span12">
+            <form class="form-horizontal">
+                <div class="row-fluid">
+                    <!-- block -->
+                    <div class="content collapse in">
+                      <div class="span12">
+                        <table class="table">
+                          <thead>
+                            <tr>
+                              <th>物品</th>
+                              <th>港口</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td>
+                                <select id="select03" class="chzn-select">
+                                  <% @goodses.each do |goods| %>
+                                    <option value=<%=goods.id %>><%= goods.name %></option>
+                                  <% end %>
+                                </select>
+                              </td>
+                              <td>
+                                <select id="select04" class="chzn-select">
+                                  <% @ports.each do |port| %>
+                                    <option value=<%=port.id %>><%= port.name %></option>
+                                  <% end %>
+                                </select>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                        
+                        <button id="cfr_button" type="button" class="btn btn-primary">查询</button>
+                      </div>
+                    </div>
+                    <!-- /block -->
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+<!-- /block -->
+
+<%= form_tag "/orders/cfr_statistic", method: :get, id: "cfr_form" do %>
+  <%= hidden_field_tag "goods_id" %>
+  <%= hidden_field_tag "port_id" %>
+<% end %>
+<div class="block">
+    <div class="span12">
+      <span class="label label-success"><%= @deliver_at %></span>
+      <span class="label label-warning"><%= @cabinet.try(:name) %></span>
+      <span class="label label-important"><%= @goods.try(:name) %></span>
+      <span class="label label-info"><%= @port.try(:name) %></span>
+    </div>
+</div>
+
+<div id="line-container">
+</div>
+<script>
+$(function(){
+  chart_data = <%=raw @array.to_json %>
+  xAxis = <%=raw @x.to_json %>
+  render_line(chart_data, xAxis, "价格", "成交价统计表");
+})
+</script>
