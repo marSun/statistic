@@ -1,3 +1,4 @@
+# encoding: utf-8
 class TransportOffersController < ApplicationController
   layout "home" 
   def new

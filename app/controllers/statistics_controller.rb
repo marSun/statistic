@@ -1,3 +1,4 @@
+# encoding: utf-8
 class StatisticsController < ApplicationController
   before_action :authenticate_user!
   layout "home"

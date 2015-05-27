@@ -1,3 +1,4 @@
+# encoding: utf-8
 class OrderService
   YEARS = %w(2015 2014 2013 2012)
 

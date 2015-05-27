@@ -1,3 +1,4 @@
+# encoding: utf-8
 class OffersController < ApplicationController
   before_action :authenticate_user!
   layout "home"
